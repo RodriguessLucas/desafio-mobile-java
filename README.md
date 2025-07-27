@@ -1,4 +1,4 @@
-# 📱 Desafio Técnico - App de Gestão Escolar (React Native) - Vaga Estágio
+# 📱 Desafio Técnico - App de Gestão Escolar (React Native) - Vaga P/ Bolsista
 
 # 🎯 Objetivo:
 - Desenvolver um aplicativo mobile em React Native que simula um sistema de gestão escolar, com diferentes funcionalidades para aluno, professor e diretor.
