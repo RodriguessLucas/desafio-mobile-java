@@ -1,10 +1,11 @@
-📱 Desafio Técnico - App de Gestão Escolar (React Native)
-🎯 Objetivo
-Desenvolver um aplicativo mobile em React Native que simula um sistema de gestão escolar, com diferentes funcionalidades para aluno, professor e diretor.
+# 📱 Desafio Técnico - App de Gestão Escolar (React Native) - Vaga Estágio
 
-Este desafio visa avaliar suas habilidades com React Native, organização de código, boas práticas e atenção a detalhes. O backend pode ser fake (simulado), mas é um diferencial implementar um backend real com Java + Spring Boot.
+# 🎯 Objetivo:
+- Desenvolver um aplicativo mobile em React Native que simula um sistema de gestão escolar, com diferentes funcionalidades para aluno, professor e diretor.
 
-👥 Perfis e Funcionalidades:
+- Este desafio visa avaliar suas habilidades com React Native, organização de código, boas práticas e atenção a detalhes. O backend pode ser fake (simulado), mas é um diferencial implementar um backend real com Java + Spring Boot.
+
+# 👥 Perfis e Funcionalidades:
 👦 Aluno
  - Fazer login (simulado)
 
@@ -39,7 +40,7 @@ Este desafio visa avaliar suas habilidades com React Native, organização de c�
 
 - As turmas podem ter múltiplos alunos e um professor responsável.
 
-🧰 Tecnologias esperadas:
+# 🧰 Tecnologias esperadas:
 - React Native (com Expo ou CLI)
 
 - AsyncStorage, Context API, Redux ou qualquer solução de estado
@@ -50,7 +51,7 @@ Este desafio visa avaliar suas habilidades com React Native, organização de c�
 
 - Dados mockados (JSON local, MockAPI, MirageJS, Firebase, etc)
 
-💡 Diferenciais (não obrigatórios)
+# 💡 Diferenciais (não obrigatórios):
 - Backend real com Java + Spring Boot (API RESTful)
 
 - Integração com banco de dados (PostgreSQL ou H2)
@@ -61,7 +62,7 @@ Este desafio visa avaliar suas habilidades com React Native, organização de c�
 
 - Deploy do backend na nuvem (Render, Railway, etc)
 
-✅ O que será avaliado:
+# ✅ O que será avaliado:
 - Funcionalidades mínimas implementadas
 
 - Clareza e organização do código
@@ -76,7 +77,7 @@ Este desafio visa avaliar suas habilidades com React Native, organização de c�
 
 - README claro com instruções de uso
 
-📌 Entrega:
+# 📌 Entrega:
 - Faça um fork deste repositório.
 
 - Desenvolva sua solução no fork.
