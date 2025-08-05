@@ -1,6 +1,8 @@
 package com.gestao_escolar.model.enums;
 
-public enum PapelEnum {
+import org.springframework.security.core.GrantedAuthority;
+
+public enum PapelEnum  implements GrantedAuthority {
     ALUNO("Aluno"),
     PROFESSOR("Professor"),
     DIRETOR("Diretor");
@@ -13,6 +15,11 @@ public enum PapelEnum {
 
     public String getDescricao(){
         return descricao;
+    }
+
+    @Override
+    public String getAuthority() {
+        return "ROLE_"+descricao;
     }
 }
 

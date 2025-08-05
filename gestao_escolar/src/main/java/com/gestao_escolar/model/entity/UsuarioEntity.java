@@ -2,21 +2,20 @@ package com.gestao_escolar.model.entity;
 
 import com.gestao_escolar.model.enums.PapelEnum;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Getter
 @Setter
 
 @Entity
 @Table(name = "usuarios")
-public class UsuarioEntity {
+public class UsuarioEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy  = GenerationType.UUID)
     private UUID id;
@@ -30,14 +29,9 @@ public class UsuarioEntity {
     @Column(nullable = false)
     private String senha;
 
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "papeis_usuarios",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name ="regra_id")
-    )
-    private List<RegraEntity> regras = new ArrayList<>();
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private PapelEnum papel;
 
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
@@ -47,4 +41,38 @@ public class UsuarioEntity {
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private List<NotaEntity> notas = new ArrayList<>();
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(papel.getAuthority()));
+    }
+
+    @Override
+    public String getPassword() {
+        return "";
+    }
+
+    @Override
+    public String getUsername() {
+        return login;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
