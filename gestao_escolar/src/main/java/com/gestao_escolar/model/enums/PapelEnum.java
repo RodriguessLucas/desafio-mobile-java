@@ -5,7 +5,8 @@ import org.springframework.security.core.GrantedAuthority;
 public enum PapelEnum  implements GrantedAuthority {
     ALUNO("Aluno"),
     PROFESSOR("Professor"),
-    DIRETOR("Diretor");
+    DIRETOR("Diretor"),
+    ADMIN("administrador");
 
     private String descricao;
 
