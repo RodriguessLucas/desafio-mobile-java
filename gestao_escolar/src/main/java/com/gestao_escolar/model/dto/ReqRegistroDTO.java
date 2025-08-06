@@ -21,7 +21,6 @@ public record ReqRegistroDTO(
         String nome,
 
         @NotNull(message = "Entrada de permissão com valor null não permitida")
-        @NotEmpty(message = "Entrada de permissão sem valor não permitida")
         PapelEnum papel
 ) {
 }
