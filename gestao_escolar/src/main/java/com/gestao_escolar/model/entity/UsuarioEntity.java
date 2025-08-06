@@ -57,7 +57,7 @@ public class UsuarioEntity implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "";
+        return senha;
     }
 
     @Override
