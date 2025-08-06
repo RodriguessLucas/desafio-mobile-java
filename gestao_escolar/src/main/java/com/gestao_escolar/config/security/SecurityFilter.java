@@ -28,7 +28,13 @@ public class SecurityFilter extends OncePerRequestFilter {
         var token = this.recuperarToken(request);
         if (token != null) {
             var login  = jwtService.validadeToken(token);
+            if(login == null || login.isBlank()) {
+                throw new RuntimeException("Erro ao validar Token");
+            }
             UserDetails user = usuarioRepository.findByLogin(login);
+            if(user == null) {
+                throw new RuntimeException("Login incorreto ou usuario não cadastrado");
+            }
 
             var autenticacao  = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(autenticacao);
