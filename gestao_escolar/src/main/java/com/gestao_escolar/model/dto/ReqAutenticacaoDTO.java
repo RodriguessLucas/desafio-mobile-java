@@ -5,12 +5,12 @@ import jakarta.validation.constraints.NotNull;
 
 public record ReqAutenticacaoDTO (
 
-        @NotNull(message = "Entrada com valor null não permitida")
-        @NotEmpty(message = "Entrada sem valor não permitida")
+        @NotNull(message = "Entrada de login com valor null não permitida")
+        @NotEmpty(message = "Entrada de login sem valor não permitida")
         String login,
 
-        @NotNull(message = "Entrada com valor null não permitida")
-        @NotEmpty(message = "Entrada sem valor não permitida")
+        @NotNull(message = "Entrada de senha com valor null não permitida")
+        @NotEmpty(message = "Entrada de senha sem valor não permitida")
         String senha
 ){
 }
