@@ -2,16 +2,19 @@ package com.gestao_escolar.model.entity;
 
 import com.gestao_escolar.model.enums.PapelEnum;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.*;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 @Table(name = "usuarios")
@@ -33,6 +36,12 @@ public class UsuarioEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private PapelEnum papel;
 
+    public UsuarioEntity(String login, String senha, String nome, PapelEnum papel) {
+        this.login = login;
+        this.senha = senha;
+        this.nome = nome;
+        this.papel = papel;
+    }
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private List<ProfessorMateriaEntity> alocacoes = new ArrayList<>();
