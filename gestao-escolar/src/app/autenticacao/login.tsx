@@ -82,12 +82,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: 30,
         justifyContent: 'center',
         backgroundColor: '#F4F6F8',
-        marginBottom:60,
     },
     header: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 40,
+        marginBottom: 80,
         flexDirection: 'row'
     },
     logo: {
@@ -150,6 +149,7 @@ const styles = StyleSheet.create({
         height: 50,
         justifyContent: 'center',
         marginTop: 20,
+        marginBottom:200
     },
     textoBtnLogar: {
         color: '#333333',
