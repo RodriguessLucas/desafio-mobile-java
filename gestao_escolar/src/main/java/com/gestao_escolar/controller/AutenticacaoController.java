@@ -27,7 +27,6 @@ public class AutenticacaoController {
         return ResponseEntity.ok(resposta);
     }
 
-
     @PostMapping("/registrar")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_DIRETOR')")
     public ResponseEntity<String> registrar(@RequestBody @Valid ReqRegistroDTO reqRegistroDTO) {
