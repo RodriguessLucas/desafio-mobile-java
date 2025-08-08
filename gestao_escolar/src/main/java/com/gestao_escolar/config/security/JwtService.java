@@ -12,10 +12,10 @@ import java.time.Instant;
 @Service
 public class JwtService {
 
-    @Value("${jwt.secret}")
+    @Value("${SECRET_KEY}")
     private String SECRET_KEY;
 
-    @Value("${jwt.expiration}")
+    @Value("${EXPIRATION_TIME}")
     private Long EXPIRATION_TIME;
 
     public String generateToken(UsuarioEntity usuario){
