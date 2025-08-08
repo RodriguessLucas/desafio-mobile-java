@@ -1,5 +1,3 @@
-// Local: src/contexts/AuthContext.tsx
-
 import axios from 'axios';
 import { useRouter } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
@@ -21,7 +19,7 @@ interface DadosAutenticacao {
 
 const AuthContext = createContext<DadosAutenticacao>({} as DadosAutenticacao);
 
-export function proverAutenticacao({ children }: { children: React.ReactNode }) {
+export function ProverAutenticacao({ children }: { children: React.ReactNode }) {
     const [estadoAut, setEstadoAut] = useState<DadosAutenticacao['estadoAut']>({
         token: null,
         autenticado: null,
@@ -32,26 +30,27 @@ export function proverAutenticacao({ children }: { children: React.ReactNode }) 
 
     useEffect(() => {
     const loadToken = async () => {
-      const token = await SecureStore.getItemAsync('authToken');
-      if (token) {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        try {
-          const response = await axios.get(`${API_URL}/user/me`);
-            setEstadoAut({
-            token: token,
-            autenticado: true,
-            usuario: response.data.user,
-            papel: response.data.user.role,
-          });
-        } catch (e) {
-            await logout();
+        const token = await SecureStore.getItemAsync('authToken');
+        if (token) {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            try {
+            const response = await axios.get(`${API_URL}/user/me`);
+                setEstadoAut({
+                token: token,
+                autenticado: true,
+                usuario: response.data.user,
+                papel: response.data.user.role,
+            });
+            } catch (e) {
+                await logout();
+            }
+        } 
+        else {
+            setEstadoAut({ token: null, autenticado: false, usuario: null, papel: null });
         }
-      } else {
-        setEstadoAut({ token: null, autenticado: false, usuario: null, papel: null });
-      }
-    };
-    loadToken();
-  }, []);
+        };
+        loadToken();
+    }, []);
 
     const login = async (login: string, senha: string) => {
         try {

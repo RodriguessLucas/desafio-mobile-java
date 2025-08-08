@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useAuth } from "../../contexts/autenticacaoContext";
 
 export default function Login(){
     const [usuario, setUsuario] = useState('');
     const [senha, setSenha] = useState('');
+    const [carregando, setCarregando] = useState(false);
+    const { login } = useAuth();
 
     const ajuda = [
         'Neste campo insira o login, por exemplo: lucas@gmail.com',
@@ -11,9 +14,28 @@ export default function Login(){
         'Este botão ao ser clicado, efetuará o login \ncaso os dados estejam corretos, logará \ncaso contrário dará erro',
     ];
 
-    const handleAjuda = (valor) => {
+    const handleAjuda = (valor: any) => {
         Alert.alert('Ajuda', ajuda[valor]);
     }
+
+
+    const handleLogin = async () => {
+        if (!usuario || !senha) {
+        Alert.alert("Atenção", "Por favor, preencha o login e a senha.");
+        return;
+        }
+
+        setCarregando(true);
+        try {
+            await login(usuario, senha);
+        
+        } catch (error: any) {
+            Alert.alert('Falha no Login', error.message);
+        } finally {
+            setCarregando(false);
+        }
+   };
+
 
     return(
         <View style={styles.container}>
@@ -65,7 +87,7 @@ export default function Login(){
 
                 <TouchableOpacity 
                     style={styles.button} 
-                    onPress={() => handleAjuda(1)}>
+                    onPress={() => handleLogin()}>
 
                     <Text style={styles.textoBtnLogar}>Entrar</Text>
                 </TouchableOpacity>
