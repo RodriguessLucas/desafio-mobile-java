@@ -153,22 +153,38 @@ public class DatabaseSeeder implements CommandLineRunner {
         return avaliacoes;
     }
 
-
+    // Substitua o seu metodo createNotas por este:
     private List<NotaEntity> createNotas(List<UsuarioEntity> usuarios, List<AvaliacaoEntity> avaliacoes) {
         List<NotaEntity> notas = new ArrayList<>();
         List<UsuarioEntity> alunos = usuarios.stream().filter(u -> u.getPapel() == PapelEnum.ALUNO).toList();
-        List<TurmaEntity> turmas = turmaRepository.findAll();
 
-        Map<TurmaEntity, List<UsuarioEntity>> alunosPorTurma = new HashMap<>();
-        for(int i = 0; i < alunos.size(); i++){
-            if(i >= 11) break; // Ignora o aluno de teste para a distribuição simples
-            TurmaEntity turmaDoAluno = turmas.get(i % turmas.size());
-            alunosPorTurma.computeIfAbsent(turmaDoAluno, k -> new ArrayList<>()).add(alunos.get(i));
+        // CORREÇÃO 1: O mapa agora usa o UUID da Turma como chave, não o objeto inteiro.
+        Map<UUID, List<UsuarioEntity>> alunosPorTurmaId = new HashMap<>();
+
+        // Obtém as turmas uma vez para evitar múltiplas chamadas ao banco
+        List<TurmaEntity> todasAsTurmas = turmaRepository.findAll();
+        if (todasAsTurmas.isEmpty()) {
+            System.out.println("   - [AVISO] Nenhuma turma encontrada. Não é possível criar notas.");
+            return notas; // Retorna lista vazia se não houver turmas
         }
 
+        // Mapeamento de alunos para turmas usando o ID da turma
+        for (int i = 0; i < alunos.size(); i++) {
+            // Ignora o "aluno.teste@gmail.com" da distribuição automática para não superlotar uma turma
+            if(alunos.get(i).getLogin().contains("aluno.teste")) continue;
+
+            TurmaEntity turmaDoAluno = todasAsTurmas.get(i % todasAsTurmas.size()); // Distribui os 10 alunos
+
+            // CORREÇÃO 2: Usa o ID da turma para popular o mapa.
+            alunosPorTurmaId.computeIfAbsent(turmaDoAluno.getId(), k -> new ArrayList<>()).add(alunos.get(i));
+        }
+
+        // Para cada avaliação, encontra os alunos da turma correta e cria as notas
         for (AvaliacaoEntity avaliacao : avaliacoes) {
             TurmaEntity turmaDaAvaliacao = avaliacao.getTurma();
-            List<UsuarioEntity> alunosDaTurma = alunosPorTurma.getOrDefault(turmaDaAvaliacao, Collections.emptyList());
+
+            // CORREÇÃO 3: Usa o ID da turma para buscar os alunos no mapa.
+            List<UsuarioEntity> alunosDaTurma = alunosPorTurmaId.getOrDefault(turmaDaAvaliacao.getId(), Collections.emptyList());
 
             for (UsuarioEntity aluno : alunosDaTurma) {
                 double notaAleatoria = ThreadLocalRandom.current().nextDouble(4.0, 10.0);
