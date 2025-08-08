@@ -1,7 +1,9 @@
 package com.gestao_escolar.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -10,7 +12,8 @@ import java.util.UUID;
 
 @Getter
 @Setter
-
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 @Table(name = "turmas")
@@ -38,4 +41,10 @@ public class TurmaEntity {
     @OneToMany(mappedBy = "turma", fetch = FetchType.LAZY)
     private List<AvaliacaoEntity> avaliacoes = new ArrayList<>();
 
+    public TurmaEntity(String serie, char letraTurma, String turno, int anoLetivo) {
+        this.serie = serie;
+        this.letraTurma = letraTurma;
+        this.turno = turno;
+        this.anoLetivo = anoLetivo;
+    }
 }

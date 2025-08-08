@@ -1,7 +1,9 @@
 package com.gestao_escolar.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -11,6 +13,8 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 @Table(name = "avaliacoes")
@@ -35,4 +39,9 @@ public class AvaliacaoEntity {
     private List<NotaEntity> notas = new ArrayList<>();
 
 
+    public AvaliacaoEntity(LocalDate data, MateriaEntity materia, TurmaEntity turma) {
+        this.dataAplicacao = data;
+        this.materia = materia;
+        this.turma = turma;
+    }
 }

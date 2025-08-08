@@ -2,13 +2,17 @@ package com.gestao_escolar.model.entity;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.UUID;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 @Table(name = "professores_materiais")
@@ -30,4 +34,9 @@ public class ProfessorMateriaEntity {
     @JoinColumn(nullable = false, name = "id_turma")
     private TurmaEntity turma;
 
+    public ProfessorMateriaEntity(UsuarioEntity usuario, MateriaEntity materia, TurmaEntity turma) {
+        this.usuario = usuario;
+        this.materia = materia;
+        this.turma = turma;
+    }
 }
