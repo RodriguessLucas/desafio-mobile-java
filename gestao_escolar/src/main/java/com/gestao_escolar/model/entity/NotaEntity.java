@@ -1,13 +1,17 @@
 package com.gestao_escolar.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.UUID;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 
 @Entity
@@ -30,5 +34,9 @@ public class NotaEntity {
     private Double nota;
 
 
-
+    public NotaEntity(Double nota, AvaliacaoEntity avaliacao, UsuarioEntity aluno) {
+        this.nota = nota;
+        this.avaliacao = avaliacao;
+        this.usuario = aluno;
+    }
 }
