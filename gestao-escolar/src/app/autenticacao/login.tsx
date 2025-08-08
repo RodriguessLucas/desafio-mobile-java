@@ -52,8 +52,8 @@ export default function Login(){
                     style={styles.input} 
                     placeholder="exemplo: lucas@gmail.com"
                     placeholderTextColor="#aaa"
-                    value={usuario}
-                    onChangeText={setUsuario}
+                    onChangeText={(texto) => setUsuario(texto.toLowerCase())}
+                    autoCapitalize="none"
                 />
                 <TouchableOpacity 
                     style={styles.btnAjudaContainer} 
