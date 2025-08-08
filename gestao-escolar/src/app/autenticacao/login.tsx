@@ -41,7 +41,7 @@ export default function Login(){
         <View style={styles.container}>
             <View style={styles.header}>
                 <Image source={require('../../assets/images/logo.png')} style={styles.logo} />
-                <Text style={styles.nomeEscola}>Escola x</Text>
+                <Text style={styles.nomeEscola}>Centro Educacional{'\n'}Passarinho Azul</Text>
             </View>
 
             <Text style={styles.login}>LOGIN</Text>
