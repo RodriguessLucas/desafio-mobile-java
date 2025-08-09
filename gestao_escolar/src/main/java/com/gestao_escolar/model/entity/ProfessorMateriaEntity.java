@@ -15,7 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "professores_materiais")
+@Table(name = "professores_materias")
 public class ProfessorMateriaEntity {
 
     @Id
