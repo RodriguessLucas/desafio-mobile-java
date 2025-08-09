@@ -37,4 +37,5 @@ public class DiretorController {
         var listaTurmas = turmaService.listarTurmas();
         return ResponseEntity.ok(listaTurmas);
     }
+
 }
