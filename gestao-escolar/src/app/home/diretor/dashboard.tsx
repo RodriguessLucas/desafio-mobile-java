@@ -1,15 +1,10 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-
 
 import BotaoLogout from '../../../components/botaoLogout';
 import Cabecalho from '../../../components/cabecalho';
 
-const mockProfessores = [
-  { id: 'p1', nome: 'Ana Carolina', disciplina: 'Matemática' },
-  { id: 'p2', nome: 'Bruno Costa', disciplina: 'Português' },
-  { id: 'p3', nome: 'Carlos Dias', disciplina: 'História' },
-];
 const mockTurmas = [
   { id: 't1', nome: 'Turma 6º Ano A', periodo: 'Manhã', totalAlunos: 25 },
   { id: 't2', nome: 'Turma 7º Ano B', periodo: 'Tarde', totalAlunos: 22 },
@@ -31,7 +26,11 @@ export default function DiretorDashboard() {
     const buscarDados = async () => {
       setIsLoading(true);
       try {
-        setProfessores(mockProfessores);
+        const getProfessores =  await axios.get('https://gestao-escolar-m4yq.onrender.com/api/diretor/professores');
+        setProfessores(getProfessores.data || null);
+        
+
+
         setTurmas(mockTurmas);
         setAlunos(mockAlunos);
       } catch (error) {
@@ -55,7 +54,7 @@ export default function DiretorDashboard() {
           {professores.map(prof => (
             <View key={prof.id} style={styles.listItem}>
               <Text style={styles.listItemTitle}>{prof.nome}</Text>
-              <Text style={styles.listItemSubtitle}>Disciplina Principal: {prof.disciplina}</Text>
+              <Text style={styles.listItemSubtitle}>Disciplina Principal: {prof.materias.join(', ')}</Text>
             </View>
           ))}
         </View>
