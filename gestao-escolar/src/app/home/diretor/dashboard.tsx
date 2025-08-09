@@ -5,15 +5,6 @@ import { ActivityIndicator, Alert, ScrollView, StyleSheet, Text, TouchableOpacit
 import BotaoLogout from '../../../components/botaoLogout';
 import Cabecalho from '../../../components/cabecalho';
 
-const mockTurmas = [
-  { id: 't1', nome: 'Turma 6º Ano A', periodo: 'Manhã', totalAlunos: 25 },
-  { id: 't2', nome: 'Turma 7º Ano B', periodo: 'Tarde', totalAlunos: 22 },
-];
-const mockAlunos = [
-  { id: 'a1', nome: 'Lucas Rodrigues', turma: 'Turma 6º Ano A', mediaGeral: 8.5 },
-  { id: 'a2', nome: 'Maria Eduarda', turma: 'Turma 7º Ano B', mediaGeral: 9.1 },
-  { id: 'a3', nome: 'João Vitor', turma: 'Turma 6º Ano A', mediaGeral: 7.2 },
-];
 
 export default function DiretorDashboard() {
   const [viewAtiva, setViewAtiva] = useState('professores');
