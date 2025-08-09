@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface TurmaRepository extends JpaRepository<TurmaEntity, UUID> {
-    List<TurmaEntity> findAllOrderBySerieAsc();
+    List<TurmaEntity> findAllByOrderBySerieAsc();
 }

@@ -13,7 +13,7 @@ public class TurmaService {
     private TurmaRepository turmaRepository;
 
     public List<ResListTurmaDTO> listarTurmas() {
-        var listTurmas = turmaRepository.findAllOrderBySerieAsc();
+        var listTurmas = turmaRepository.findAllByOrderBySerieAsc();
         return listTurmas.stream().map(ResListTurmaDTO::new).toList();
     }
 
