@@ -6,7 +6,7 @@ public enum PapelEnum  implements GrantedAuthority {
     ALUNO("Aluno"),
     PROFESSOR("Professor"),
     DIRETOR("Diretor"),
-    ADMIN("administrador");
+    ADMIN("Administrador");
 
     private String descricao;
 
@@ -20,7 +20,7 @@ public enum PapelEnum  implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return "ROLE_"+descricao;
+        return "ROLE_"+this.name();
     }
 }
 
