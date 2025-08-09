@@ -29,10 +29,13 @@ export default function DiretorDashboard() {
         const getProfessores =  await axios.get('https://gestao-escolar-m4yq.onrender.com/api/diretor/professores');
         setProfessores(getProfessores.data || null);
         
+        const getTurmas = await axios.get('https://gestao-escolar-m4yq.onrender.com/api/diretor/turmas');
+        setTurmas(getTurmas.data);
 
 
-        setTurmas(mockTurmas);
-        setAlunos(mockAlunos);
+        const getAlunos = await axios.get('https://gestao-escolar-m4yq.onrender.com/api/diretor/alunos');
+        setAlunos(getAlunos.data);
+
       } catch (error) {
         Alert.alert('Erro de Rede', 'Não foi possível carregar os dados do servidor.');
       } finally {
@@ -67,8 +70,8 @@ export default function DiretorDashboard() {
           <Text style={styles.listHeader}>Todas as Turmas</Text>
           {turmas.map(turma => (
             <View key={turma.id} style={styles.listItem}>
-              <Text style={styles.listItemTitle}>{turma.nome}</Text>
-              <Text style={styles.listItemSubtitle}>{turma.periodo} - {turma.totalAlunos} alunos</Text>
+              <Text style={styles.listItemTitle}>{turma.turma}</Text>
+              <Text style={styles.listItemSubtitle}>{turma.turno}</Text>
             </View>
           ))}
         </View>
@@ -82,10 +85,6 @@ export default function DiretorDashboard() {
           {alunos.map(aluno => (
             <View key={aluno.id} style={styles.listItem}>
               <Text style={styles.listItemTitle}>{aluno.nome}</Text>
-              <View style={styles.alunoDetails}>
-                <Text style={styles.listItemSubtitle}>Turma: {aluno.turma}</Text>
-                <Text style={styles.mediaNota}>Média: {aluno.mediaGeral.toFixed(1)}</Text>
-              </View>
             </View>
           ))}
         </View>
@@ -105,7 +104,7 @@ export default function DiretorDashboard() {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <Cabecalho />
       
       <View style={styles.botoesAcaoContainer}>
@@ -134,12 +133,12 @@ export default function DiretorDashboard() {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.conteudoContainer}>
+      <ScrollView style={styles.conteudoContainer}>
         <RenderizarConteudo />
-      </View>
+      </ScrollView>
 
       <BotaoLogout />
-    </ScrollView>
+    </View>
   );
 }
 
