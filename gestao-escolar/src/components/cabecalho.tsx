@@ -1,5 +1,3 @@
-// Local: src/components/Cabecalho.tsx
-
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { useAuth } from '../contexts/autenticacaoContext';
@@ -30,7 +28,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
     paddingHorizontal: 15,
-    backgroundColor: '#f0f2f5',
+    backgroundColor: '#F4F6F8',
     marginBottom: 20, 
   },
   headerEsq: {
