@@ -34,6 +34,7 @@ public class ProfessorMateriaService {
 
                     List<String> materias = listaDoProfessor.stream()
                             .map(ProfessorMateriaDTO::materia)
+                            .distinct()
                             .collect(Collectors.toList());
 
                     return new ResListProfessorDTO(idProfessor, nomeProfessor, materias);
