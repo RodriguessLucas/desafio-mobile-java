@@ -35,13 +35,6 @@ public class DiretorController {
         return ResponseEntity.ok(listaProfessores);
     }
 
-
-    @GetMapping("/turmas")
-    public ResponseEntity<List<ResListTurmaDTO>> listarTurmas() {
-        var listaTurmas = turmaService.listarTurmas();
-        return ResponseEntity.ok(listaTurmas);
-    }
-
     @GetMapping("/alunos")
     public ResponseEntity<List<ResListAlunoDTO>> listarAlunos() {
         var listarAlunos = usuarioService.listarAlunos();
