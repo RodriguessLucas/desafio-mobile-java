@@ -38,12 +38,6 @@ public class TurmaEntity {
     @OneToMany(mappedBy = "turma")
     private List<ProfessorMateriaEntity> alocacoes = new ArrayList<>();
 
-
-    @OneToMany(mappedBy = "turma", fetch = FetchType.LAZY)
-    private List<NotaEntity> alunoNotas = new ArrayList<>();
-
-
-
     public TurmaEntity(String serie, char letraTurma, String turno, int anoLetivo) {
         this.serie = serie;
         this.letraTurma = letraTurma;

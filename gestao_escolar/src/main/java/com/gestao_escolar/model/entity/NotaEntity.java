@@ -31,12 +31,12 @@ public class NotaEntity {
     private Double nota;
 
     @ManyToOne
-    @JoinColumn(name = "id_turma")
-    private TurmaEntity turma;
+    @JoinColumn(name = "id_professor_materia")
+    private ProfessorMateriaEntity professorMateria;
 
-    public NotaEntity(Double nota, TurmaEntity turma , UsuarioEntity aluno) {
+    public NotaEntity(Double nota, ProfessorMateriaEntity professorMateria , UsuarioEntity aluno) {
         this.nota = nota;
-        this.turma = turma;
+        this.professorMateria = professorMateria;
         this.usuario = aluno;
     }
 }
