@@ -46,6 +46,9 @@ public class UsuarioEntity implements UserDetails {
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private List<ProfessorMateriaEntity> alocacoes = new ArrayList<>();
 
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private  List<AlunoTurmaEntity> matriculados =  new ArrayList<>();
+
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private List<NotaEntity> notas = new ArrayList<>();

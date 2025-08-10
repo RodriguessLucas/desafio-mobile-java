@@ -24,9 +24,6 @@ public class DiretorController {
     private ProfessorMateriaService professorMateriaService;
 
     @Autowired
-    private TurmaService turmaService;
-
-    @Autowired
     private UsuarioService usuarioService;
 
     @GetMapping("/professores")

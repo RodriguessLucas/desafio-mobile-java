@@ -6,28 +6,29 @@ import com.gestao_escolar.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
-import org.springframework.security.crypto.password.PasswordEncoder; // IMPORTANTE
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 @Component
-@Profile("seed")
+@Profile("seed") // Este componente só será executado quando o perfil "seed" estiver ativo
 public class DatabaseSeeder implements CommandLineRunner {
 
-    // Injeção dos repositórios
+    // Injeção de todos os repositórios necessários
     @Autowired private UsuarioRepository usuarioRepository;
     @Autowired private MateriaRepository materiaRepository;
     @Autowired private TurmaRepository turmaRepository;
     @Autowired private ProfessorMateriaRepository professorMateriaRepository;
-    @Autowired private AvaliacaoRepository avaliacaoRepository;
+    @Autowired private AlunoTurmaRepository alunoTurmaRepository; // Repositório para matrículas
     @Autowired private NotaRepository notaRepository;
 
-    // AJUSTE 1: Injetando o encoder de senhas
+    // Injeção do PasswordEncoder para criptografar as senhas
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -35,6 +36,7 @@ public class DatabaseSeeder implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println("--- [PERFIL 'seed' ATIVO] Iniciando o processo de seeding do banco de dados ---");
 
+        // Condição para não executar o seeder se o banco já tiver dados
         if (usuarioRepository.count() > 0) {
             System.out.println("--- [AVISO] O banco de dados já está populado. Seeding não será executado. ---");
             return;
@@ -42,51 +44,51 @@ public class DatabaseSeeder implements CommandLineRunner {
 
         System.out.println("[OK] Banco de dados vazio. Criando e salvando novas entidades...");
 
-        // A lógica de criação e salvamento permanece a mesma
+        // 1. Criar entidades primárias (sem dependências)
         List<UsuarioEntity> usuarios = createUsuarios();
         List<MateriaEntity> materias = createMaterias();
         List<TurmaEntity> turmas = createTurmas();
 
+        // 2. Salvar entidades primárias para que tenham IDs
         usuarioRepository.saveAll(usuarios);
         materiaRepository.saveAll(materias);
         turmaRepository.saveAll(turmas);
 
-        List<ProfessorMateriaEntity> associacoes = createProfessoresMaterias(usuarios, materias, turmas);
-        professorMateriaRepository.saveAll(associacoes);
+        // 3. Criar e salvar entidades de relacionamento
+        List<ProfessorMateriaEntity> alocacoes = createAlocacoesProfessores(usuarios, materias, turmas);
+        professorMateriaRepository.saveAll(alocacoes);
 
-        List<AvaliacaoEntity> avaliacoes = createAvaliacoes(associacoes);
-        avaliacaoRepository.saveAll(avaliacoes);
+        List<AlunoTurmaEntity> matriculas = createMatriculas(usuarios, turmas);
+        alunoTurmaRepository.saveAll(matriculas);
 
-        List<NotaEntity> notas = createNotas(usuarios, avaliacoes);
+        List<NotaEntity> notas = createNotas(matriculas, alocacoes);
         notaRepository.saveAll(notas);
 
-        System.out.println("\n--- [SUCESSO] Banco de dados populado e senhas criptografadas! ---");
+        System.out.println("\n--- [SUCESSO] Banco de dados populado com dados de teste consistentes! ---");
     }
 
     private List<UsuarioEntity> createUsuarios() {
+        System.out.println("   - Criando usuários...");
         List<UsuarioEntity> usuarios = new ArrayList<>();
-
-        // AJUSTE 2: Usando o passwordEncoder para gerar o hash da senha
         String senhaPadraoCriptografada = passwordEncoder.encode("123456");
 
-        // 10 Alunos
+        // Alunos
         String[] alunosNomes = {"Miguel Silva", "Arthur Costa", "Gael Almeida", "Heitor Martins", "Theo Oliveira", "Helena Pereira", "Alice Rodrigues", "Laura Ferreira", "Maria Alice Souza", "Sophia Gomes"};
         for (String nome : alunosNomes) {
-            usuarios.add(new UsuarioEntity(nome.toLowerCase().split(" ")[0] + "@aluno.com", senhaPadraoCriptografada, nome, PapelEnum.ALUNO));
+            usuarios.add(new UsuarioEntity(nome.toLowerCase().replace(" ", ".") + "@aluno.com", senhaPadraoCriptografada, nome, PapelEnum.ALUNO));
         }
 
-        // 5 Professores
+        // Professores
         String[] professoresNomes = {"Carlos Drummond", "Cecília Meireles", "Machado de Assis", "Clarice Lispector", "Graciliano Ramos"};
         for (String nome : professoresNomes) {
-            usuarios.add(new UsuarioEntity(nome.toLowerCase().split(" ")[0] + "@prof.com", senhaPadraoCriptografada, nome, PapelEnum.PROFESSOR));
+            usuarios.add(new UsuarioEntity(nome.toLowerCase().replace(" ", ".") + "@prof.com", senhaPadraoCriptografada, nome, PapelEnum.PROFESSOR));
         }
 
-        // 1 Diretor e 1 Admin
-        usuarios.add(new UsuarioEntity("monteiro@dir.com", senhaPadraoCriptografada, "Monteiro Lobato", PapelEnum.DIRETOR));
-        usuarios.add(new UsuarioEntity("augusto@admin.com", senhaPadraoCriptografada, "Augusto dos Anjos", PapelEnum.ADMIN));
+        // Gestão
+        usuarios.add(new UsuarioEntity("monteiro.lobato@dir.com", senhaPadraoCriptografada, "Monteiro Lobato", PapelEnum.DIRETOR));
+        usuarios.add(new UsuarioEntity("augusto.anjos@admin.com", senhaPadraoCriptografada, "Augusto dos Anjos", PapelEnum.ADMIN));
 
-        // Usuários de teste com a mesma senha padrão criptografada
-        System.out.println("   - Criando usuários de teste com senha padrão criptografada...");
+        // Usuários de teste fixos
         usuarios.add(new UsuarioEntity("aluno.teste@gmail.com", senhaPadraoCriptografada, "Aluno Teste", PapelEnum.ALUNO));
         usuarios.add(new UsuarioEntity("professor.teste@gmail.com", senhaPadraoCriptografada, "Professor Teste", PapelEnum.PROFESSOR));
         usuarios.add(new UsuarioEntity("diretor.teste@gmail.com", senhaPadraoCriptografada, "Diretor Teste", PapelEnum.DIRETOR));
@@ -96,100 +98,91 @@ public class DatabaseSeeder implements CommandLineRunner {
         return usuarios;
     }
 
-    // ... O restante dos métodos (createMaterias, createTurmas, etc.) permanecem exatamente iguais ...
-    // ... (cole o restante dos métodos da resposta anterior aqui) ...
     private List<MateriaEntity> createMaterias() {
-        List<MateriaEntity> materias = new ArrayList<>();
-        materias.add(new MateriaEntity("Matemática"));
-        materias.add(new MateriaEntity("Português"));
-        materias.add(new MateriaEntity("História"));
-        materias.add(new MateriaEntity("Geografia"));
-        materias.add(new MateriaEntity("Ciências"));
+        System.out.println("   - Criando matérias...");
+        List<MateriaEntity> materias = List.of(
+                new MateriaEntity("Matemática"), new MateriaEntity("Português"),
+                new MateriaEntity("História"), new MateriaEntity("Geografia"), new MateriaEntity("Ciências")
+        );
+        materiaRepository.saveAll(materias);
         System.out.println("   - Criadas " + materias.size() + " matérias.");
         return materias;
     }
 
     private List<TurmaEntity> createTurmas() {
-        List<TurmaEntity> turmas = new ArrayList<>();
-        turmas.add(new TurmaEntity("9", 'A', "Manhã", 2025));
-        turmas.add(new TurmaEntity("9", 'B', "Tarde", 2025));
-        turmas.add(new TurmaEntity("8", 'A', "Manhã", 2025));
-        turmas.add(new TurmaEntity("8", 'B', "Tarde", 2025));
-        turmas.add(new TurmaEntity("7", 'C', "Manhã", 2025));
+        System.out.println("   - Criando turmas...");
+        List<TurmaEntity> turmas = List.of(
+                new TurmaEntity("9º Ano", 'A', "Manhã", 2025),
+                new TurmaEntity("9º Ano", 'B', "Tarde", 2025),
+                new TurmaEntity("8º Ano", 'A', "Manhã", 2025)
+        );
+        turmaRepository.saveAll(turmas);
         System.out.println("   - Criadas " + turmas.size() + " turmas.");
         return turmas;
     }
 
-    private List<ProfessorMateriaEntity> createProfessoresMaterias(List<UsuarioEntity> usuarios, List<MateriaEntity> materias, List<TurmaEntity> turmas) {
-        List<ProfessorMateriaEntity> associacoes = new ArrayList<>();
+    private List<ProfessorMateriaEntity> createAlocacoesProfessores(List<UsuarioEntity> usuarios, List<MateriaEntity> materias, List<TurmaEntity> turmas) {
+        System.out.println("   - Alocando professores em matérias e turmas...");
+        List<ProfessorMateriaEntity> alocacoes = new ArrayList<>();
         List<UsuarioEntity> professores = usuarios.stream().filter(u -> u.getPapel() == PapelEnum.PROFESSOR).toList();
 
-        associacoes.add(new ProfessorMateriaEntity(professores.get(0), materias.get(0), turmas.get(0)));
-        associacoes.add(new ProfessorMateriaEntity(professores.get(0), materias.get(0), turmas.get(1)));
-        associacoes.add(new ProfessorMateriaEntity(professores.get(1), materias.get(1), turmas.get(0)));
-        associacoes.add(new ProfessorMateriaEntity(professores.get(1), materias.get(1), turmas.get(2)));
+        // Professor 0 (Carlos) -> Matemática -> Turmas 0 e 1
+        alocacoes.add(new ProfessorMateriaEntity(professores.get(0), materias.get(0), turmas.get(0)));
+        alocacoes.add(new ProfessorMateriaEntity(professores.get(0), materias.get(0), turmas.get(1)));
+
+        // Professor 1 (Cecília) -> Português -> Turmas 0 e 2
+        alocacoes.add(new ProfessorMateriaEntity(professores.get(1), materias.get(1), turmas.get(0)));
+        alocacoes.add(new ProfessorMateriaEntity(professores.get(1), materias.get(1), turmas.get(2)));
+
+        // Professor 2 (Machado) -> História -> Todas as turmas
         for (TurmaEntity turma : turmas) {
-            associacoes.add(new ProfessorMateriaEntity(professores.get(2), materias.get(2), turma));
-        }
-        associacoes.add(new ProfessorMateriaEntity(professores.get(3), materias.get(3), turmas.get(1)));
-        associacoes.add(new ProfessorMateriaEntity(professores.get(3), materias.get(3), turmas.get(3)));
-        associacoes.add(new ProfessorMateriaEntity(professores.get(4), materias.get(4), turmas.get(0)));
-        associacoes.add(new ProfessorMateriaEntity(professores.get(4), materias.get(4), turmas.get(2)));
-        associacoes.add(new ProfessorMateriaEntity(professores.get(4), materias.get(4), turmas.get(4)));
-
-        System.out.println("   - Criadas " + associacoes.size() + " associações de professores.");
-        return associacoes;
-    }
-
-    private List<AvaliacaoEntity> createAvaliacoes(List<ProfessorMateriaEntity> associacoes) {
-        List<AvaliacaoEntity> avaliacoes = new ArrayList<>();
-
-        avaliacoes.add(new AvaliacaoEntity(LocalDate.of(2025, 3, 15), associacoes.get(0).getMateria(), associacoes.get(0).getTurma()));
-        avaliacoes.add(new AvaliacaoEntity(LocalDate.of(2025, 3, 22), associacoes.get(2).getMateria(), associacoes.get(2).getTurma()));
-        avaliacoes.add(new AvaliacaoEntity(LocalDate.of(2025, 4, 5), associacoes.get(4).getMateria(), associacoes.get(4).getTurma()));
-        avaliacoes.add(new AvaliacaoEntity(LocalDate.of(2025, 4, 10), associacoes.get(3).getMateria(), associacoes.get(3).getTurma()));
-
-        System.out.println("   - Criadas " + avaliacoes.size() + " avaliações.");
-        return avaliacoes;
-    }
-
-    // Substitua o seu metodo createNotas por este:
-    private List<NotaEntity> createNotas(List<UsuarioEntity> usuarios, List<AvaliacaoEntity> avaliacoes) {
-        List<NotaEntity> notas = new ArrayList<>();
-        List<UsuarioEntity> alunos = usuarios.stream().filter(u -> u.getPapel() == PapelEnum.ALUNO).toList();
-
-        // CORREÇÃO 1: O mapa agora usa o UUID da Turma como chave, não o objeto inteiro.
-        Map<UUID, List<UsuarioEntity>> alunosPorTurmaId = new HashMap<>();
-
-        // Obtém as turmas uma vez para evitar múltiplas chamadas ao banco
-        List<TurmaEntity> todasAsTurmas = turmaRepository.findAll();
-        if (todasAsTurmas.isEmpty()) {
-            System.out.println("   - [AVISO] Nenhuma turma encontrada. Não é possível criar notas.");
-            return notas; // Retorna lista vazia se não houver turmas
+            alocacoes.add(new ProfessorMateriaEntity(professores.get(2), materias.get(2), turma));
         }
 
-        // Mapeamento de alunos para turmas usando o ID da turma
+        System.out.println("   - Criadas " + alocacoes.size() + " alocações de professores.");
+        return alocacoes;
+    }
+
+    private List<AlunoTurmaEntity> createMatriculas(List<UsuarioEntity> usuarios, List<TurmaEntity> turmas) {
+        System.out.println("   - Matriculando alunos em turmas...");
+        List<AlunoTurmaEntity> matriculas = new ArrayList<>();
+        List<UsuarioEntity> alunos = usuarios.stream()
+                .filter(u -> u.getPapel() == PapelEnum.ALUNO && !u.getLogin().contains("teste"))
+                .toList();
+
+        // Distribui os alunos pelas turmas de forma equilibrada
         for (int i = 0; i < alunos.size(); i++) {
-            // Ignora o "aluno.teste@gmail.com" da distribuição automática para não superlotar uma turma
-            if(alunos.get(i).getLogin().contains("aluno.teste")) continue;
-
-            TurmaEntity turmaDoAluno = todasAsTurmas.get(i % todasAsTurmas.size()); // Distribui os 10 alunos
-
-            // CORREÇÃO 2: Usa o ID da turma para popular o mapa.
-            alunosPorTurmaId.computeIfAbsent(turmaDoAluno.getId(), k -> new ArrayList<>()).add(alunos.get(i));
+            TurmaEntity turma = turmas.get(i % turmas.size()); // Ex: 0%3=0, 1%3=1, 2%3=2, 3%3=0, ...
+            matriculas.add(new AlunoTurmaEntity(alunos.get(i), turma));
         }
 
-        // Para cada avaliação, encontra os alunos da turma correta e cria as notas
-        for (AvaliacaoEntity avaliacao : avaliacoes) {
-            TurmaEntity turmaDaAvaliacao = avaliacao.getTurma();
+        System.out.println("   - Criadas " + matriculas.size() + " matrículas de alunos.");
+        return matriculas;
+    }
 
-            // CORREÇÃO 3: Usa o ID da turma para buscar os alunos no mapa.
-            List<UsuarioEntity> alunosDaTurma = alunosPorTurmaId.getOrDefault(turmaDaAvaliacao.getId(), Collections.emptyList());
+    private List<NotaEntity> createNotas(List<AlunoTurmaEntity> matriculas, List<ProfessorMateriaEntity> alocacoes) {
+        System.out.println("   - Gerando notas para os alunos...");
+        List<NotaEntity> notas = new ArrayList<>();
 
-            for (UsuarioEntity aluno : alunosDaTurma) {
+        // Para cada matrícula (vínculo aluno-turma)
+        for (AlunoTurmaEntity matricula : matriculas) {
+            UsuarioEntity aluno = matricula.getUsuario();
+            TurmaEntity turma = matricula.getTurma();
+
+            // Encontra todas as matérias que são lecionadas naquela turma
+            List<MateriaEntity> materiasDaTurma = alocacoes.stream()
+                    .filter(alocacao -> alocacao.getTurma().getId().equals(turma.getId()))
+                    .map(ProfessorMateriaEntity::getMateria)
+                    .distinct()
+                    .toList();
+
+            // Para cada matéria da turma, cria uma nota para o aluno
+            for (MateriaEntity materia : materiasDaTurma) {
                 double notaAleatoria = ThreadLocalRandom.current().nextDouble(4.0, 10.0);
                 BigDecimal notaFormatada = new BigDecimal(notaAleatoria).setScale(1, RoundingMode.HALF_UP);
-                notas.add(new NotaEntity(notaFormatada.doubleValue(), avaliacao, aluno));
+
+                // Criando a nota (você pode querer adicionar a matéria na NotaEntity também)
+                notas.add(new NotaEntity(notaFormatada.doubleValue(), turma, aluno));
             }
         }
         System.out.println("   - Criadas " + notas.size() + " notas.");
