@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
 public interface AlunoTurmaRepository extends JpaRepository<AlunoTurmaEntity, UUID> {
+    boolean existsByUsuarioIdAndTurmaId(UUID idAluno, UUID idTurma);
 }

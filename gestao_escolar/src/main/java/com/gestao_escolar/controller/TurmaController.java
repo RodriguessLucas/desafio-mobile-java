@@ -1,8 +1,12 @@
 package com.gestao_escolar.controller;
 
 
+import com.gestao_escolar.model.dto.ReqCadastrarNotaDTO;
 import com.gestao_escolar.model.dto.ResListAlunoDTO;
+import com.gestao_escolar.model.dto.ResListMateriaDTO;
 import com.gestao_escolar.model.dto.ResListTurmaDTO;
+import com.gestao_escolar.service.NotaService;
+import com.gestao_escolar.service.ProfessorMateriaService;
 import com.gestao_escolar.service.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +23,11 @@ public class TurmaController {
     @Autowired
     private TurmaService turmaService;
 
+    @Autowired
+    private ProfessorMateriaService professorMateriaService;
+    @Autowired
+    private NotaService notaService;
+
     @GetMapping("/turmas")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_DIRETOR', 'ROLE_PROFESSOR')")
     public ResponseEntity<List<ResListTurmaDTO>> listarTurmas() {
@@ -32,6 +41,22 @@ public class TurmaController {
         var alunosTurma = turmaService.listarAlunosByTurma(idTurma);
         return  ResponseEntity.ok(alunosTurma);
     }
+
+    @GetMapping("/turmas/{idTurma}/materias")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_DIRETOR', 'ROLE_PROFESSOR')")
+    public ResponseEntity<List<ResListMateriaDTO>> listarMateriasTurma(@PathVariable UUID idTurma) {
+        var materiaTurma = professorMateriaService.listarMateriasPorTurma(idTurma);
+        return  ResponseEntity.ok(materiaTurma);
+    }
+
+    @PostMapping("/turmas/cadastrarnotas")
+    @PreAuthorize("hasAnyAuthority('ROLE_DIRETOR','ROLE_PROFESSOR')")
+    public ResponseEntity cadatrarNotas(@RequestBody List<ReqCadastrarNotaDTO> notasAlunos){
+        notaService.cadastrarNota(notasAlunos);
+        return ResponseEntity.ok("Sucesso!");
+    }
+
+
 
 
 }

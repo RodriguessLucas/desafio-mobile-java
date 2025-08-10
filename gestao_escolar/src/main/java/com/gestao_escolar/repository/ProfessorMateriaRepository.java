@@ -1,6 +1,7 @@
 package com.gestao_escolar.repository;
 
 import com.gestao_escolar.model.dto.ProfessorMateriaDTO;
+import com.gestao_escolar.model.dto.ResListMateriaDTO;
 import com.gestao_escolar.model.entity.ProfessorMateriaEntity;
 import com.gestao_escolar.model.enums.PapelEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,4 +22,15 @@ public interface ProfessorMateriaRepository extends JpaRepository<ProfessorMater
             "ORDER BY u.nome, m.nome")
     List<ProfessorMateriaDTO> findAllProfessoresAndMaterias(@Param("papel") PapelEnum papel);
 
+
+    @Query("SELECT DISTINCT new com.gestao_escolar.model.dto.ResListMateriaDTO(m.id, m.nome) " +
+            "FROM ProfessorMateriaEntity p "+
+            "JOIN p.materia m "+
+            "WHERE p.turma.id = :turmaId " +
+            "ORDER BY m.nome ASC "
+    )
+    List<ResListMateriaDTO> findAllMateriasByTurmaOrder(@Param("turmaId") UUID turmaId);
+
+
+    ProfessorMateriaEntity findByMateriaIdAndTurmaId(UUID idMateria, UUID idTurma);
 }

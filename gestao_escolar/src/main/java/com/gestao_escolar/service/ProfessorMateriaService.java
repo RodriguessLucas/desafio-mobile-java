@@ -1,6 +1,7 @@
 package com.gestao_escolar.service;
 
 import com.gestao_escolar.model.dto.ProfessorMateriaDTO;
+import com.gestao_escolar.model.dto.ResListMateriaDTO;
 import com.gestao_escolar.model.dto.ResListProfessorDTO;
 import com.gestao_escolar.model.enums.PapelEnum;
 import com.gestao_escolar.repository.ProfessorMateriaRepository;
@@ -40,5 +41,11 @@ public class ProfessorMateriaService {
                     return new ResListProfessorDTO(idProfessor, nomeProfessor, materias);
                 })
                 .collect(Collectors.toList());
+    }
+
+
+    public List<ResListMateriaDTO> listarMateriasPorTurma(UUID turmaId) {
+        var materiasTurma = professorMateriaRepository.findAllMateriasByTurmaOrder(turmaId);
+        return  materiasTurma;
     }
 }
