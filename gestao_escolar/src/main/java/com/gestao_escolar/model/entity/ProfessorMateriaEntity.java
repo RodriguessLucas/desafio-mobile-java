@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -33,6 +35,9 @@ public class ProfessorMateriaEntity {
     @ManyToOne
     @JoinColumn(nullable = false, name = "id_turma")
     private TurmaEntity turma;
+
+    @OneToMany(mappedBy = "professorMateria")
+    private List<NotaEntity> notas = new ArrayList<>();
 
     public ProfessorMateriaEntity(UsuarioEntity usuario, MateriaEntity materia, TurmaEntity turma) {
         this.usuario = usuario;

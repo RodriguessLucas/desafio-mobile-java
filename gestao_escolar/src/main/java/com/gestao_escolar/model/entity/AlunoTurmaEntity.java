@@ -17,31 +17,23 @@ import java.util.UUID;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "avaliacoes")
-public class AvaliacaoEntity {
+@Table(name = "alunos_turmas")
+public class AlunoTurmaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "id_materia")
-    private MateriaEntity materia;
+    @JoinColumn(name = "id_usuario")
+    private UsuarioEntity usuario;
 
     @ManyToOne
     @JoinColumn(name = "id_turma")
     private TurmaEntity turma;
 
-    @Column(nullable = false, name = "data_aplicacao")
-    private LocalDate dataAplicacao;
-
-    @OneToMany(mappedBy = "avaliacao", fetch = FetchType.LAZY)
-    private List<NotaEntity> notas = new ArrayList<>();
-
-
-    public AvaliacaoEntity(LocalDate data, MateriaEntity materia, TurmaEntity turma) {
-        this.dataAplicacao = data;
-        this.materia = materia;
+    public AlunoTurmaEntity(UsuarioEntity usuarioEntity, TurmaEntity turma) {
+        this.usuario = usuarioEntity;
         this.turma = turma;
     }
 }

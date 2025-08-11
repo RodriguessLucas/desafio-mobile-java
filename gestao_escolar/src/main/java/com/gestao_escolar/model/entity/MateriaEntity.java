@@ -31,9 +31,6 @@ public class MateriaEntity {
     private List<ProfessorMateriaEntity> alocacoes = new ArrayList<>();
 
 
-    @OneToMany(mappedBy = "materia", fetch = FetchType.LAZY)
-    private List<AvaliacaoEntity> avaliacoes = new ArrayList<>();
-
     public MateriaEntity(String nome) {
         this.nome = nome;
     }

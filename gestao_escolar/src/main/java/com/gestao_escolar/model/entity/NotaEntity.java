@@ -22,9 +22,6 @@ public class NotaEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_avaliacao")
-    private AvaliacaoEntity avaliacao;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
@@ -33,10 +30,13 @@ public class NotaEntity {
     @Column(nullable = false)
     private Double nota;
 
+    @ManyToOne
+    @JoinColumn(name = "id_professor_materia")
+    private ProfessorMateriaEntity professorMateria;
 
-    public NotaEntity(Double nota, AvaliacaoEntity avaliacao, UsuarioEntity aluno) {
+    public NotaEntity(Double nota, ProfessorMateriaEntity professorMateria , UsuarioEntity aluno) {
         this.nota = nota;
-        this.avaliacao = avaliacao;
+        this.professorMateria = professorMateria;
         this.usuario = aluno;
     }
 }
