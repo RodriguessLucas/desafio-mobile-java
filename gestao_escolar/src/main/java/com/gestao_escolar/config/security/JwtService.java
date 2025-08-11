@@ -53,7 +53,7 @@ public class JwtService {
     }
 
     private Instant getExpirationDate(){
-        return Instant.now().plusSeconds(EXPIRATION_TIME);
+        return Instant.now().plusMillis(EXPIRATION_TIME);
     }
 
 
