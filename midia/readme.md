@@ -1,83 +1,148 @@
-# 📱 Desafio Técnico - App de Gestão Escolar (React Native) - Vaga P/ Bolsista
+# 📱 Desafio Técnico — App de Gestão Escolar (React Native)  
+**Vaga para Bolsista**
 
-# Tópicos:
-    OBJETIVO;
-    PERFIL E FUNCIONALIDADE
-    TECNOLOGIAs USADAs
-    COMO FOI ESTRUTURADO E REFERENCIAS
-    COMO TESTAR
-        LOCAL
-        DEPLOY
+---
 
-# 🎯 Objetivo:
-- Desenvolver um aplicativo mobile em React Native que simula um sistema de gestão escolar, com diferentes funcionalidades para aluno, professor e diretor.
+## 🎯 Objetivo  
+Desenvolver um aplicativo mobile em **React Native** que simula um sistema de **gestão escolar**, com funcionalidades distintas para **Aluno**, **Professor** e **Diretor**.  
+O desafio busca avaliar:  
+- Habilidades com React Native  
+- Organização de código e boas práticas  
+- Atenção a detalhes  
 
-- Este desafio visa avaliar suas habilidades com React Native, organização de código, boas práticas e atenção a detalhes. O backend pode ser fake (simulado), mas é um diferencial implementar um backend real com Java + Spring Boot.
+> **Diferencial:** Implementar backend real com **Java + Spring Boot** (opcionalmente pode ser fake).  
 
-- Desafio: Início 04/08 até dia 18/08/2025.
+**Período:** 04/08 a 18/08/2025.
 
-# 👥 Perfis e Funcionalidades:
-👦 Aluno
- - Fazer login (simulado)
+---
 
- - Ver suas notas por disciplina
+## 👥 Perfis e Funcionalidades  
 
- - Ver dados da turma (nome, série, professor responsável)
+### 👦 Aluno
+- Login (simulado)  
+- Visualizar **notas por disciplina**  
+- Visualizar **dados da turma** (nome, série, professor responsável)  
 
-👨‍🏫 Professor
- - Fazer login (simulado)
+### 👨‍🏫 Professor
+- Login (simulado)  
+- Visualizar **turmas que leciona**  
+- Visualizar **alunos da turma**  
+- **Cadastrar notas** por aluno e disciplina  
 
- - Ver lista das turmas que leciona
+### 👨‍💼 Diretor
+- Login (simulado)  
+- Visualizar **todas as turmas**  
+- Visualizar **todos os professores e alunos**  
+- Visualizar **notas gerais** (modo leitura)  
 
- - Ver alunos da turma
+---
 
- - Cadastrar notas por aluno e disciplina
+## 🧾 Regras de Negócio
+- Aluno: apenas suas próprias informações.  
+- Professor: apenas notas de suas turmas.  
+- Diretor: acesso total em leitura.  
+- Turmas: múltiplos alunos e **1 professor responsável**.
 
-👨‍💼 Diretor
- - Fazer login (simulado)
+---
 
- - Ver todas as turmas
+## 🛠 Tecnologias Usadas  
+- **Backend:** Java / Spring Boot  
+- **Banco de Dados:** PostgreSQL  
+- **Mobile App:** React Native (Expo)  
+- **Deploy:**  
+  - Backend: Render  
+  - Mobile: Expo + Firebase  
 
- - Ver todos os professores e alunos
+---
 
- - Ver notas gerais dos alunos (modo leitura)
+## 📂 Estrutura e Referências  
 
-🧾 Regras de Negócio: 
-- Um aluno só pode ver suas próprias informações.
+- **Modelagem de Dados:** Simples, mas representando o uso real de um sistema escolar.  
+- **Seeder:** Popula dados de forma automatizada (usuários, turmas, notas, professores).  
 
-- Um professor só pode cadastrar/ver notas dos alunos de suas turmas.
+- **Design de Telas:** Parcialmente baseado no trabalho prático da UFC  
+  - [Figma - Trabalho Prático ES 2025.2](https://www.figma.com/design/eMNaVvGUoBekdMPBYBHHhX/Trabalho-Pratico-02-ES-2025.2?node-id=0-1&t=a77x28bZOULz9N40-1)
 
-- O diretor tem acesso a todos os dados, mas não edita notas.
+---
 
-- As turmas podem ter múltiplos alunos e um professor responsável.
+## 🖼 Prints e Diagramas
+
+### 📌 Diagrama do Banco de Dados
+![Diagrama Banco de Dados](assets/diagrama-banco.png)
+
+### 📱 Telas do Aplicativo
+
+**Tela de Login**
+![Tela Login](/midia/login.jpeg)
+
+**Dashboard Aluno**
+![Dashboard Aluno](/midia/dashboardAluno.jpeg)
+
+**Dashboard Professor**
+![Dashboard Professor](/midia/dashboardProfessor.jpeg)
+
+**Dashboard Diretor**
+![Dashboard Diretor](/midia/dashboardDiretor.jpeg)
+
+---
+
+## 🏗 Backend
+- Arquitetura **MVC** (Spring) para REST APIs  
+- Segurança nos endpoints (JWT + Roles: Aluno, Diretor, Admin, Professor)  
+- Configuração de CORS restritiva  
+- Criptografia de **senhas e IDs** com SHA-256  
+
+---
+
+## 📱 Frontend
+- **React Native** com Expo  
+- **Axios** para requisições  
+- **SecureStore** para criptografar dados sensíveis (ex.: retorno de login)  
+
+---
+
+## 🧪 Como Testar  
+
+### Usuários de Teste  
+Todos com senha **123456**:  
+    **diretor.teste@gmail.com**   
+    **professor.teste@gmail.com**  
+    **machado.de.assis@prof.com**  
+    **admin.teste@gmail.com**  
+    **aluno.teste@gmail.com**
+
+#### OBSERVAÇÃO: o usuario machado.de.assis possui relacionamento com turma, logo para vizualização de dados na tela de dashboard de professor, é o ideal.
 
 
+---
 
-# Tecnologias Usadas
-    BACKEND - JAVA/SPRING BOOT 
-    BANCO DE DADOS - POSTGRES 
-    MOBILE APP - REACT NATIVE(EXPO)
+### Ambiente Local  
 
-    DEPLOY:
-        BACKEND + DADOS - RENDER
-        MOBILE APP: EXPO + FIREBASE
+**Frontend:**
+```bash
+npx start
+a  # para abrir no emulador Android
 
+OBS: Ou escanear o QR Code pelo app do Expo no celular (rede local).
+```
 
-# COMO FOI ESTRUTURADO E REFERENCIAS
+**Backend:**  
+[Swagger Local](http://localhost:8080/swagger-ui/index.html)  
 
-NA MODELAGEM DE DADOS, FOI FEITO ALGO SIMPLES MAS que consiga representar o uso do dia a dia de um sistema escolar, segue a img abaixo da modelagem:
+---
 
-E QUANTO a popular os dados para que possamos simular o funcionamento real, foi desenvoltido um data base seeder, onde é gerados uma quantidade razoavel e usuarios e acoes feitas pelos mesmos(participarem de uma turma, terem notas, ministrar aulas e etc)
+## 🚀 Deploy  
 
+**Frontend:**  
+[Firebase App Distribution](https://appdistribution.firebase.dev/i/8189cb170efbc944)  
 
-NO BACK END ULTILIZAMOS A ARQUITETURA MVC(PADRAO DO SPRING) voltada para REST APIS, com segurança nos endpoints, onde cada tipo de usuario(ALUNO, DIRETOR, ADMIN E PROFESSOR) so poderiam acessar os endpoints tendo o token de autenticação e a role pertencente.
-COMO FOI ultilziado  a camada de segurança, protegemos os endpoints e configuramos o cors, onde permite e delega apenas tentativas de acesso que foram previamente descritas.
-ULTILIZAMOS Tambem criptografia para SENHAS e IDs, pois é o padrão ultilizado para dificultar o possivel invasor de conseguir ter conhecimento do banco de dados. E para isso ultilizamos o sha256, onde por padrão nunca repete o valor criptografado, por mais que antes de serem criptografados sejam a mesma senha "123456" por exemplo, quando criptografadas nunca terao o mesmo hash.
+**Backend:**  
+[Swagger no Render](https://gestao-escolar-m4yq.onrender.com/swagger-ui/index.html)  
 
+---
 
+## ⚠️ Dificuldades  
+- **Primeiro contato** com React Native → atraso no desenvolvimento por integrar endpoints junto às telas.  
+- **Primeira configuração** de segurança e CORS no Spring Boot.  
 
-
-
-
-
-
+> Apesar dos desafios, a experiência foi **enriquecedora** e agregou novos aprendizados.
