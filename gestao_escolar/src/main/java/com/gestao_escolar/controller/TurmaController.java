@@ -52,6 +52,7 @@ public class TurmaController {
             @ApiResponse(responseCode = "404", description = "Professor não encontrado")
     })
     @GetMapping("/turmas/{idProfessor}/professor")
+    @PreAuthorize("hasAuthority('ROLE_PROFESSOR')")
     public ResponseEntity<List<ResListTurmaDTO>> listarTurmasPorProfessor(
             @Parameter(description = "ID do professor (usuário) para buscar as turmas") @PathVariable UUID idProfessor) {
         var listaTurmas = turmaService.listarTurmasByProfessor(idProfessor);
@@ -66,6 +67,7 @@ public class TurmaController {
             @ApiResponse(responseCode = "404", description = "Turma não encontrada")
     })
     @GetMapping("/turmas/{idTurma}/alunos")
+    @PreAuthorize("hasAuthority('ROLE_PROFESSOR')")
     public ResponseEntity<List<ResListAlunoDTO>> listarAlunosPorTurma(
             @Parameter(description = "ID da turma para buscar os alunos") @PathVariable UUID idTurma) {
         var alunosTurma = turmaService.listarAlunosByTurma(idTurma);
@@ -83,6 +85,7 @@ public class TurmaController {
             @ApiResponse(responseCode = "404", description = "Turma não encontrada")
     })
     @GetMapping("/turmas/{idTurma}/materias")
+    @PreAuthorize("hasAuthority('ROLE_PROFESSOR')")
     public ResponseEntity<List<ResListMateriaDTO>> listarMateriasPorTurma(
             @Parameter(description = "ID da turma para buscar as matérias") @PathVariable UUID idTurma) {
         var materiaTurma = professorMateriaService.listarMateriasPorTurma(idTurma);
