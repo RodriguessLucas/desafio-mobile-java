@@ -13,10 +13,10 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 @Service
 public class JwtService {
 
-    @Value("${SECRET_KEY}")
+    @Value("${jwt.secret}")
     private String SECRET_KEY;
 
-    @Value("${EXPIRATION_TIME}")
+    @Value("${jwt.expiration}")
     private Long EXPIRATION_TIME;
 
     public String generateToken(UsuarioEntity usuario){
