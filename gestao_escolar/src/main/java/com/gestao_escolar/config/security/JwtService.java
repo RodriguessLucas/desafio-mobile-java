@@ -25,7 +25,7 @@ public class JwtService {
             String token = JWT.create()
                     .withIssuer("auth-api-gestao-escolar")
                     .withSubject(usuario.getLogin())
-                    .withClaim("role",usuario.getPapel().getDescricao())
+                    .withClaim("role",usuario.getPapel().getAuthority())
                     .withIssuedAt(Instant.now())
                     .withExpiresAt(getExpirationDate())
                     .sign(algorithm);
