@@ -32,7 +32,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/diretor/alunos")
-    @PreAuthorize("hasAuthority('ROLE_DIRETOR')")
+    @PreAuthorize("hasAnyAuthority('ROLE_DIRETOR')")
     public ResponseEntity<List<ResListAlunoDTO>> listarAlunos() {
         var listarAlunos = usuarioService.listarAlunos();
         return ResponseEntity.ok(listarAlunos);

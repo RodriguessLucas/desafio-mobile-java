@@ -16,13 +16,13 @@ public interface TurmaRepository extends JpaRepository<TurmaEntity, UUID> {
     List<TurmaEntity> findAllByOrderBySerieAsc();
 
 
-    @Query("SELECT new com.gestao_escolar.model.dto.ResListAlunoDTO(u.id, u.nome) FROM UsuarioEntity u " +
+    @Query("SELECT u.id, u.nome FROM UsuarioEntity u " +
             "JOIN u.matriculados m "+
             "JOIN m.turma t "+
             "WHERE t.id = :turmaId "+
             "ORDER BY u.nome ASC "
     )
-    List<ResListAlunoDTO> findByTurmaIdOrderByUsuarioNomeAsc(@Param("turmaId") UUID turmaId);
+    List<UsuarioEntity> findByTurmaIdOrderByUsuarioNomeAsc(@Param("turmaId") UUID turmaId);
 
 
     @Query("SELECT new com.gestao_escolar.model.dto.ResListTurmaDTO(t.id, t.serie, t.turno) " +

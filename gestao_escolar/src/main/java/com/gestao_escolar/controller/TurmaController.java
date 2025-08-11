@@ -57,7 +57,7 @@ public class TurmaController {
     }
 
     @PostMapping("/turmas/cadastrarnotas")
-    @PreAuthorize("hasAnyAuthority('ROLE_DIRETOR','ROLE_PROFESSOR')")
+    @PreAuthorize("hasAnyAuthority('ROLE_PROFESSOR')")
     public ResponseEntity cadatrarNotas(@RequestBody List<ReqCadastrarNotaDTO> notasAlunos){
         notaService.cadastrarNota(notasAlunos);
         return ResponseEntity.ok("Sucesso!");
