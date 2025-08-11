@@ -43,7 +43,7 @@ public class UsuarioService {
         var token = jwtService.generateToken((UsuarioEntity) autenticacao.getPrincipal());
         var user = (UsuarioEntity) autenticacao.getPrincipal();
 
-        return new ResAutenticacaoDTO(token, user.getLogin(),user.getNome(), user.getPapel());
+        return new ResAutenticacaoDTO(token, user.getLogin(),user.getNome(), user.getPapel(),user.getId());
     }
 
     public void registrar(ReqRegistroDTO reqRegistroDTO) {
