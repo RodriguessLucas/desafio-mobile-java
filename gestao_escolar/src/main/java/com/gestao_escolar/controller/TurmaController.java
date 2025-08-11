@@ -29,22 +29,29 @@ public class TurmaController {
     private NotaService notaService;
 
     @GetMapping("/turmas")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_DIRETOR', 'ROLE_PROFESSOR')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_DIRETOR')")
     public ResponseEntity<List<ResListTurmaDTO>> listarTurmas() {
         var listaTurmas = turmaService.listarTurmas();
         return ResponseEntity.ok(listaTurmas);
     }
 
+    @GetMapping("/turmas/{idProfessor}/professor")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_DIRETOR', 'ROLE_PROFESSOR')")
+    public ResponseEntity<List<ResListTurmaDTO>> listarTurmasPorProfessor(@PathVariable UUID idProfessor) {
+        var listaTurmas = turmaService.listarTurmasByProfessor(idProfessor);
+        return ResponseEntity.ok(listaTurmas);
+    }
+
     @GetMapping("/turmas/{idTurma}/alunos")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_DIRETOR', 'ROLE_PROFESSOR')")
-    public ResponseEntity<List<ResListAlunoDTO>> listarTurmasAlunos(@PathVariable UUID idTurma) {
+    public ResponseEntity<List<ResListAlunoDTO>> listarAlunosPorTurma(@PathVariable UUID idTurma) {
         var alunosTurma = turmaService.listarAlunosByTurma(idTurma);
         return  ResponseEntity.ok(alunosTurma);
     }
 
     @GetMapping("/turmas/{idTurma}/materias")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_DIRETOR', 'ROLE_PROFESSOR')")
-    public ResponseEntity<List<ResListMateriaDTO>> listarMateriasTurma(@PathVariable UUID idTurma) {
+    public ResponseEntity<List<ResListMateriaDTO>> listarMateriasPorTurma(@PathVariable UUID idTurma) {
         var materiaTurma = professorMateriaService.listarMateriasPorTurma(idTurma);
         return  ResponseEntity.ok(materiaTurma);
     }
