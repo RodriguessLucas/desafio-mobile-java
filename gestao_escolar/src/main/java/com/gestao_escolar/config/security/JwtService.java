@@ -13,15 +13,15 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 @Service
 public class JwtService {
 
-    @Value("${jwt.secret}")
-    private String SECRET_KEY;
+    @Value("${jwt.secret-key}")
+    private String secretKey;
 
-    @Value("${jwt.expiration}")
-    private Long EXPIRATION_TIME;
+    @Value("${jwt.expiration-time-ms}")
+    private Long expirationTimeMs;
 
     public String generateToken(UsuarioEntity usuario){
         try {
-            Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
+            Algorithm algorithm = Algorithm.HMAC256(secretKey);
             String token = JWT.create()
                     .withIssuer("auth-api-gestao-escolar")
                     .withSubject(usuario.getLogin())
@@ -40,7 +40,7 @@ public class JwtService {
 
     public String validadeToken(String token){
         try {
-            Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
+            Algorithm algorithm = Algorithm.HMAC256(secretKey);
             return JWT.require(algorithm)
                     .withIssuer("auth-api-gestao-escolar")
                     .build()
@@ -53,7 +53,7 @@ public class JwtService {
     }
 
     private Instant getExpirationDate(){
-        return Instant.now().plusMillis(EXPIRATION_TIME);
+        return Instant.now().plusMillis(expirationTimeMs);
     }
 
 
