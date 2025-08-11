@@ -37,6 +37,7 @@ public class SecurityConfiguration {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
+                    req.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll();
                     req.requestMatchers("/v3/api-docs/**").permitAll();
                     req.requestMatchers("/swagger-ui.html").permitAll();
