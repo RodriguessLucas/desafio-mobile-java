@@ -12,22 +12,24 @@ export default function DiretorDashboard() {
   const [turmas, setTurmas] = useState([]);
   const [alunos, setAlunos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [mostrarNotas, setMostrarNotas] = useState(false);
 
   useEffect(() => {
     const buscarDados = async () => {
       setIsLoading(true);
       try {
-        const getProfessores =  await axios.get('https://gestao-escolar-m4yq.onrender.com/api/diretor/professores');
-        setProfessores(getProfessores.data || null);
-        
-        const getTurmas = await axios.get('https://gestao-escolar-m4yq.onrender.com/api/diretor/turmas');
-        setTurmas(getTurmas.data);
+        const [profResponse, turmasResponse, alunosResponse] = await Promise.all([
+          axios.get('https://gestao-escolar-m4yq.onrender.com/api/diretor/professores'),
+          axios.get('https://gestao-escolar-m4yq.onrender.com/api/turmas'), 
+          axios.get('https://gestao-escolar-m4yq.onrender.com/api/diretor/alunos'),
+        ]);
 
-
-        const getAlunos = await axios.get('https://gestao-escolar-m4yq.onrender.com/api/diretor/alunos');
-        setAlunos(getAlunos.data);
+        setProfessores(profResponse.data || []);
+        setTurmas(turmasResponse.data || []);
+        setAlunos(alunosResponse.data || []);
 
       } catch (error) {
+        console.error("Erro ao buscar dados:", error);
         Alert.alert('Erro de Rede', 'Não foi possível carregar os dados do servidor.');
       } finally {
         setIsLoading(false);
@@ -36,9 +38,10 @@ export default function DiretorDashboard() {
     buscarDados();
   }, []);
 
+
   const RenderizarConteudo = () => {
     if (isLoading) {
-      return <ActivityIndicator size="large" color="#0d47a1" style={{ marginTop: 40 }}/>;
+      return <ActivityIndicator size="large" color="#1E5F8C" style={{ marginTop: 40 }}/>;
     }
 
     if (viewAtiva === 'professores') {
@@ -48,7 +51,7 @@ export default function DiretorDashboard() {
           {professores.map(prof => (
             <View key={prof.id} style={styles.listItem}>
               <Text style={styles.listItemTitle}>{prof.nome}</Text>
-              <Text style={styles.listItemSubtitle}>Disciplina Principal: {prof.materias.join(', ')}</Text>
+              <Text style={styles.listItemSubtitle}>Matérias: {prof.materias.join(', ')}</Text>
             </View>
           ))}
         </View>
@@ -62,7 +65,7 @@ export default function DiretorDashboard() {
           {turmas.map(turma => (
             <View key={turma.id} style={styles.listItem}>
               <Text style={styles.listItemTitle}>{turma.turma}</Text>
-              <Text style={styles.listItemSubtitle}>{turma.turno}</Text>
+              <Text style={styles.listItemSubtitle}>Turno: {turma.turno}</Text>
             </View>
           ))}
         </View>
@@ -72,10 +75,27 @@ export default function DiretorDashboard() {
     if (viewAtiva === 'alunos') {
       return (
         <View>
-          <Text style={styles.listHeader}>Alunos e Notas Gerais</Text>
-          {alunos.map(aluno => (
-            <View key={aluno.id} style={styles.listItem}>
+          <View style={styles.listHeaderContainer}>
+            <Text style={styles.listHeader}>Alunos e Notas Gerais</Text>
+            <TouchableOpacity onPress={() => setMostrarNotas(!mostrarNotas)}>
+              <Text style={styles.toggleNotasTexto}>{mostrarNotas ? 'Ocultar Notas' : 'Mostrar Notas'}</Text>
+            </TouchableOpacity>
+          </View>
+
+          {alunos.map((aluno, index) => (
+            <View key={`${aluno.id}-${index}`} style={styles.listItem}>
               <Text style={styles.listItemTitle}>{aluno.nome}</Text>
+              
+              {mostrarNotas && (
+                <View style={styles.notasContainer}>
+                  {aluno.notas.map((nota, notaIndex) => (
+                    <View key={`${nota.idMateria}-${notaIndex}`} style={styles.notaIndividual}>
+                      <Text style={styles.notaMateria}>{nota.nomeMateria}:</Text>
+                      <Text style={styles.notaValor}>{nota.nota.toFixed(1)}</Text>
+                    </View>
+                  ))}
+                </View>
+              )}
             </View>
           ))}
         </View>
@@ -124,11 +144,12 @@ export default function DiretorDashboard() {
         </TouchableOpacity>
       </View>
 
-      <ScrollView style={styles.conteudoContainer}>
-        <RenderizarConteudo />
+      <ScrollView style={styles.conteudoScroll}>
+        <View style={styles.conteudoContainer}>
+          <RenderizarConteudo />
+        </View>
+        <BotaoLogout />
       </ScrollView>
-
-      <BotaoLogout />
     </View>
   );
 }
@@ -138,12 +159,12 @@ const styles = StyleSheet.create({
   container: { 
     flex: 1, 
     backgroundColor: '#F4F6F8',
-    paddingVertical:40,
+    paddingVertical:30,
   },
   botoesAcaoContainer: { 
     flexDirection: 'row', 
     justifyContent: 'space-around', 
-    marginVertical: 20, 
+    marginVertical: 15, 
     paddingHorizontal: 10,
     flexWrap: 'wrap', 
   },
@@ -168,14 +189,28 @@ const styles = StyleSheet.create({
   textoAtivo: { 
     color: '#fff',
   },
+  conteudoScroll: {
+    flex: 1,
+  },
   conteudoContainer: { 
     paddingHorizontal: 15,
+    paddingBottom: 20,
+  },
+  listHeaderContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 15,
   },
   listHeader: { 
     fontSize: 20, 
     fontWeight: 'bold', 
     color: '#333', 
-    marginBottom: 15,
+  },
+  toggleNotasTexto: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#1E5F8C',
   },
   listItem: { 
     backgroundColor: '#fff', 
@@ -196,14 +231,23 @@ const styles = StyleSheet.create({
     color: 'gray', 
     marginTop: 4,
   },
-  alunoDetails: { 
-    flexDirection: 'row', 
-    justifyContent: 'space-between', 
-    marginTop: 4,
+  notasContainer: {
+    marginTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#eee',
+    paddingTop: 10,
   },
-  mediaNota: { 
-    fontSize: 14, 
-    fontWeight: 'bold', 
-    color: '#1E5F8C',
+  notaIndividual: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 5,
+  },
+  notaMateria: {
+    fontSize: 14,
+    color: '#555',
+  },
+  notaValor: {
+    fontSize: 14,
+    fontWeight: 'bold',
   },
 });
