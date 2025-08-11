@@ -1,0 +1,61 @@
+package com.gestao_escolar.config.security;
+
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
+import com.gestao_escolar.model.entity.UsuarioEntity;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import java.time.Instant;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+
+@Service
+public class JwtService {
+
+    @Value("${jwt.secret-key}")
+    private String secretKey;
+
+    @Value("${jwt.expiration-time-ms}")
+    private Long expirationTimeMs;
+
+    public String generateToken(UsuarioEntity usuario){
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(secretKey);
+            String token = JWT.create()
+                    .withIssuer("auth-api-gestao-escolar")
+                    .withSubject(usuario.getLogin())
+                    .withClaim("role",usuario.getPapel().getAuthority())
+                    .withIssuedAt(Instant.now())
+                    .withExpiresAt(getExpirationDate())
+                    .sign(algorithm);
+
+            return token;
+
+        }catch (JWTCreationException e){
+            throw new RuntimeException("Erro ao gerar o token JWT: " + e.getMessage());
+        }
+
+    }
+
+    public String validadeToken(String token){
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(secretKey);
+            return JWT.require(algorithm)
+                    .withIssuer("auth-api-gestao-escolar")
+                    .build()
+                    .verify(token)
+                    .getSubject();
+
+        }catch (JWTVerificationException e){
+            return null;
+        }
+    }
+
+    private Instant getExpirationDate(){
+        return Instant.now().plusMillis(expirationTimeMs);
+    }
+
+
+
+}
