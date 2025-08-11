@@ -8,6 +8,7 @@ import com.gestao_escolar.model.entity.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.time.Instant;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 
 @Service
 public class JwtService {
@@ -46,8 +47,8 @@ public class JwtService {
                     .verify(token)
                     .getSubject();
 
-        }catch (JWTCreationException e){
-            return "";
+        }catch (JWTVerificationException e){
+            return null;
         }
     }
 
