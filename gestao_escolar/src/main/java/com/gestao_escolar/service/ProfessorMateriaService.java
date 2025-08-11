@@ -6,7 +6,9 @@ import com.gestao_escolar.model.dto.ResListProfessorDTO;
 import com.gestao_escolar.model.enums.PapelEnum;
 import com.gestao_escolar.repository.ProfessorMateriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Map;
@@ -21,8 +23,14 @@ public class ProfessorMateriaService {
 
     public List<ResListProfessorDTO> listarProfessoresComMaterias() {
 
-        List<ProfessorMateriaDTO> professoresFlat =
+        var professoresFlat =
                 professorMateriaRepository.findAllProfessoresAndMaterias(PapelEnum.PROFESSOR);
+        if(professoresFlat.isEmpty()) {
+            throw  new ResponseStatusException(
+                    HttpStatus.NO_CONTENT,
+                    "Nenhum professor encontrado"
+            );
+        }
 
         Map<UUID, List<ProfessorMateriaDTO>> professoresAgrupadosPorId = professoresFlat.stream()
                 .collect(Collectors.groupingBy(ProfessorMateriaDTO::id));
@@ -46,6 +54,14 @@ public class ProfessorMateriaService {
 
     public List<ResListMateriaDTO> listarMateriasPorTurma(UUID turmaId) {
         var materiasTurma = professorMateriaRepository.findAllMateriasByTurmaOrder(turmaId);
+
+        if(materiasTurma.isEmpty()) {
+            throw  new ResponseStatusException(
+                    HttpStatus.NO_CONTENT,
+                    "Nenhuma Turma encontrada"
+            );
+        }
+
         return  materiasTurma;
     }
 }

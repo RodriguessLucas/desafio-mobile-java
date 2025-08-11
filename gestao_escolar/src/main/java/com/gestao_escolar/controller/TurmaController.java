@@ -53,6 +53,10 @@ public class TurmaController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_DIRETOR', 'ROLE_PROFESSOR')")
     public ResponseEntity<List<ResListMateriaDTO>> listarMateriasPorTurma(@PathVariable UUID idTurma) {
         var materiaTurma = professorMateriaService.listarMateriasPorTurma(idTurma);
+        if(materiaTurma.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
         return  ResponseEntity.ok(materiaTurma);
     }
 
