@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5eeda514-fb89-4213-816e-c8561454d129" name="Changes" comment="refactor: ajustes na autorização" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Record" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="develop/mobileApp" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="SWAP_SIDES_IN_COMPARE_BRANCHES" value="true" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;RodriguessLucas&quot;
+  }
+}</component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="deploy/backend" />
+                    <option name="lastUsedInstant" value="1754914820" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="develop/backend" />
+                    <option name="lastUsedInstant" value="1754888896" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="develop/app" />
+                    <option name="lastUsedInstant" value="1754677322" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$/.." />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/RodriguessLucas/desafio-mobile-java&quot;,
+    &quot;accountId&quot;: &quot;dcee58c0-72b9-435a-9018-5d4167f8db7f&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="30yrj2XJoofgwmV8DQuLlgpFuxx" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.GestaoEscolarApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;deploy/backend&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/lucasrodrigues/Music/gex/gex-api&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.customizations&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="GestaoEscolarApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <module name="gestao_escolar" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.gestao_escolar.GestaoEscolarApplication" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.27812.49" />
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-IU-251.27812.49" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5eeda514-fb89-4213-816e-c8561454d129" name="Changes" comment="" />
+      <created>1754610785020</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1754610785020</updated>
+      <workItem from="1754610786308" duration="982000" />
+      <workItem from="1754612941898" duration="10744000" />
+      <workItem from="1754676821051" duration="953000" />
+      <workItem from="1754681207464" duration="982000" />
+      <workItem from="1754682257020" duration="7203000" />
+      <workItem from="1754746987119" duration="15919000" />
+      <workItem from="1754823802311" duration="29642000" />
+      <workItem from="1754884114026" duration="269000" />
+      <workItem from="1754884509378" duration="8145000" />
+      <workItem from="1754893344388" duration="974000" />
+      <workItem from="1754895561455" duration="1116000" />
+      <workItem from="1754896885766" duration="1811000" />
+      <workItem from="1754908085921" duration="44000" />
+      <workItem from="1754913903055" duration="642000" />
+      <workItem from="1754914813889" duration="1418000" />
+      <workItem from="1754916256422" duration="459000" />
+    </task>
+    <task id="LOCAL-00002" summary="chore: ajustes url db">
+      <option name="closed" value="true" />
+      <created>1754613240766</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1754613240766</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat: add de config de cors">
+      <option name="closed" value="true" />
+      <created>1754614980127</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1754614980127</updated>
+    </task>
+    <task id="LOCAL-00004" summary="chore: ajustes">
+      <option name="closed" value="true" />
+      <created>1754616796486</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1754616796486</updated>
+    </task>
+    <task id="LOCAL-00005" summary="chore: ajustes em properties">
+      <option name="closed" value="true" />
+      <created>1754617780463</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1754617780463</updated>
+    </task>
+    <task id="LOCAL-00006" summary="chore: ajustes em valores de propiedades">
+      <option name="closed" value="true" />
+      <created>1754618258335</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1754618258335</updated>
+    </task>
+    <task id="LOCAL-00007" summary="chore: ajustes em valores para teste">
+      <option name="closed" value="true" />
+      <created>1754619560827</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1754619560827</updated>
+    </task>
+    <task id="LOCAL-00008" summary="chore: ajustes em valores para teste">
+      <option name="closed" value="true" />
+      <created>1754619598528</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1754619598528</updated>
+    </task>
+    <task id="LOCAL-00009" summary="chore: ajustes em valores para teste">
+      <option name="closed" value="true" />
+      <created>1754620142792</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1754620142792</updated>
+    </task>
+    <task id="LOCAL-00010" summary="chore: ajustes em valores para teste">
+      <option name="closed" value="true" />
+      <created>1754620847452</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1754620847452</updated>
+    </task>
+    <task id="LOCAL-00011" summary="chore: ajustes properts">
+      <option name="closed" value="true" />
+      <created>1754621326813</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1754621326813</updated>
+    </task>
+    <task id="LOCAL-00012" summary="chore: ajustes no docker compose">
+      <option name="closed" value="true" />
+      <created>1754622451230</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1754622451230</updated>
+    </task>
+    <task id="LOCAL-00013" summary="refactor: add de campo nome na resposta de autenticacao">
+      <option name="closed" value="true" />
+      <created>1754677706284</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1754677706284</updated>
+    </task>
+    <task id="LOCAL-00014" summary="feat: add de populador de banco de dados, e ajustes para que suporte a crição dos dados">
+      <option name="closed" value="true" />
+      <created>1754688399148</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1754688399148</updated>
+    </task>
+    <task id="LOCAL-00015" summary="feat: add de populador de banco de dados, e ajustes para que suporte a crição dos dados">
+      <option name="closed" value="true" />
+      <created>1754688620312</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1754688620312</updated>
+    </task>
+    <task id="LOCAL-00016" summary="feat: add de populador de banco de dados, e ajustes para que suporte a crição dos dados">
+      <option name="closed" value="true" />
+      <created>1754689707162</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1754689707162</updated>
+    </task>
+    <task id="LOCAL-00017" summary="feat: add de populador de banco de dados, e ajustes para que suporte a crição dos dados">
+      <option name="closed" value="true" />
+      <created>1754689904602</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1754689904602</updated>
+    </task>
+    <task id="LOCAL-00018" summary="refactor: ajustes no databaseseeder para gerar notas">
+      <option name="closed" value="true" />
+      <created>1754690526702</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1754690526702</updated>
+    </task>
+    <task id="LOCAL-00019" summary="refactor: ajustes no databaseseeder para gerar notas">
+      <option name="closed" value="true" />
+      <created>1754690853462</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1754690853462</updated>
+    </task>
+    <task id="LOCAL-00020" summary="refactor: ajustes na nomeclatura das tabelas">
+      <option name="closed" value="true" />
+      <created>1754755260656</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1754755260656</updated>
+    </task>
+    <task id="LOCAL-00021" summary="feat: criacao de endpoint para listar professores c materias">
+      <option name="closed" value="true" />
+      <created>1754755317387</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1754755317387</updated>
+    </task>
+    <task id="LOCAL-00022" summary="refactor: ajustes de lógica">
+      <option name="closed" value="true" />
+      <created>1754760041643</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1754760041643</updated>
+    </task>
+    <task id="LOCAL-00023" summary="feat: desenvolvimento do endpoint de listar turmas para diretor">
+      <option name="closed" value="true" />
+      <created>1754761627897</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1754761627897</updated>
+    </task>
+    <task id="LOCAL-00024" summary="refactor: ajutes quando a segurança e acesso">
+      <option name="closed" value="true" />
+      <created>1754763696480</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1754763696480</updated>
+    </task>
+    <task id="LOCAL-00025" summary="feat: criacao do endpoint para listar alunos em diretor">
+      <option name="closed" value="true" />
+      <created>1754765348117</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1754765348117</updated>
+    </task>
+    <task id="LOCAL-00026" summary="refactor: ajustes para ficar ordenado por serie">
+      <option name="closed" value="true" />
+      <created>1754765909544</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1754765909544</updated>
+    </task>
+    <task id="LOCAL-00027" summary="feat: add endpoint para listar todos os alunos para diretor, e ajustes para ordenar">
+      <option name="closed" value="true" />
+      <created>1754768237020</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1754768237020</updated>
+    </task>
+    <task id="LOCAL-00028" summary="refactor: movido o método de listar turmas para turma controller">
+      <option name="closed" value="true" />
+      <created>1754824214040</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1754824214040</updated>
+    </task>
+    <task id="LOCAL-00029" summary="refactor: ajustes nas entidades e relacionamentos">
+      <option name="closed" value="true" />
+      <created>1754827657480</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1754827657480</updated>
+    </task>
+    <task id="LOCAL-00030" summary="refactor: ajustes nas entidades e relacionamentos">
+      <option name="closed" value="true" />
+      <created>1754828960424</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1754828960424</updated>
+    </task>
+    <task id="LOCAL-00031" summary="feat: endpoint para listar alunos de um turma">
+      <option name="closed" value="true" />
+      <created>1754832056343</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1754832056343</updated>
+    </task>
+    <task id="LOCAL-00032" summary="feat: endpoint para cadastrar notas de alunos em uma turma">
+      <option name="closed" value="true" />
+      <created>1754853625769</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1754853625769</updated>
+    </task>
+    <task id="LOCAL-00033" summary="feat: endpoint para listar turmas que professores ministram">
+      <option name="closed" value="true" />
+      <created>1754875282750</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1754875282750</updated>
+    </task>
+    <task id="LOCAL-00034" summary="refactor: alocação de métodos para usuario">
+      <option name="closed" value="true" />
+      <created>1754875469877</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1754875469877</updated>
+    </task>
+    <task id="LOCAL-00035" summary="refactor: alocação de métodos que retorna lista de alunos, para que retorne tbm suas notas">
+      <option name="closed" value="true" />
+      <created>1754880402595</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1754880402596</updated>
+    </task>
+    <task id="LOCAL-00036" summary="refactor: alocação de métodos que retorna lista de alunos, para que retorne tbm suas notas">
+      <option name="closed" value="true" />
+      <created>1754880411536</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1754880411536</updated>
+    </task>
+    <task id="LOCAL-00037" summary="refactor: ajustes nos tratamentos de excecoes">
+      <option name="closed" value="true" />
+      <created>1754880910773</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1754880910773</updated>
+    </task>
+    <task id="LOCAL-00038" summary="refactor: ajustes na resposta de login para retornar id">
+      <option name="closed" value="true" />
+      <created>1754881549196</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1754881549196</updated>
+    </task>
+    <task id="LOCAL-00039" summary="feat: ajustes para aparecer o swagger e documentação da api">
+      <option name="closed" value="true" />
+      <created>1754883557745</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1754883557745</updated>
+    </task>
+    <task id="LOCAL-00040" summary="refactor: ajustes na segurança para permitir acesso ao swagger">
+      <option name="closed" value="true" />
+      <created>1754884330241</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1754884330241</updated>
+    </task>
+    <task id="LOCAL-00041" summary="refactor: ajustes na segurança para permitir acesso ao swagger">
+      <option name="closed" value="true" />
+      <created>1754885350784</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1754885350784</updated>
+    </task>
+    <task id="LOCAL-00042" summary="refactor: ajustes para permitir acesso ao swagger">
+      <option name="closed" value="true" />
+      <created>1754885845926</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1754885845926</updated>
+    </task>
+    <task id="LOCAL-00043" summary="refactor: ajustes para permitir acesso ao swagger">
+      <option name="closed" value="true" />
+      <created>1754887494738</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1754887494738</updated>
+    </task>
+    <task id="LOCAL-00044" summary="refactor: ajustes para permitir acesso ao swagger">
+      <option name="closed" value="true" />
+      <created>1754887903681</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1754887903681</updated>
+    </task>
+    <task id="LOCAL-00045" summary="refactor: ajustes">
+      <option name="closed" value="true" />
+      <created>1754888889341</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1754888889341</updated>
+    </task>
+    <task id="LOCAL-00046" summary="refactor: ajustes no swagger">
+      <option name="closed" value="true" />
+      <created>1754891561907</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1754891561907</updated>
+    </task>
+    <task id="LOCAL-00047" summary="refactor: ajustes no cors para permitir uso do swagger">
+      <option name="closed" value="true" />
+      <created>1754892121505</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1754892121505</updated>
+    </task>
+    <task id="LOCAL-00048" summary="refactor: ajustes">
+      <option name="closed" value="true" />
+      <created>1754894305360</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1754894305360</updated>
+    </task>
+    <task id="LOCAL-00049" summary="refactor: ajustes no cors">
+      <option name="closed" value="true" />
+      <created>1754898136331</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1754898136331</updated>
+    </task>
+    <task id="LOCAL-00050" summary="refactor: ajustes na autorização">
+      <option name="closed" value="true" />
+      <created>1754916276716</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1754916276716</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: criacao de endpoint para listar professores c materias" />
+    <MESSAGE value="refactor: ajustes de lógica" />
+    <MESSAGE value="feat: desenvolvimento do endpoint de listar turmas para diretor" />
+    <MESSAGE value="refactor: ajutes quando a segurança e acesso" />
+    <MESSAGE value="feat: criacao do endpoint para listar alunos em diretor" />
+    <MESSAGE value="refactor: ajustes para ficar ordenado por nome" />
+    <MESSAGE value="refactor: ajustes para ficar ordenado por serie" />
+    <MESSAGE value="feat: add endpoint para listar todos os alunos para diretor, e ajustes para ordenar" />
+    <MESSAGE value="refactor: movido o método de listar turmas para turma controller" />
+    <MESSAGE value="refactor: ajustes nas entidades e relacionamentos" />
+    <MESSAGE value="feat: endpoint para listar alunos de um turma" />
+    <MESSAGE value="feat: endpoint para cadastrar notas de alunos em uma turma" />
+    <MESSAGE value="feat: endpoint para listar turmas que professores ministram" />
+    <MESSAGE value="refactor: alocação de métodos para usuario" />
+    <MESSAGE value="refactor: alocação de métodos que retorna lista de alunos, para que retorne tbm suas notas" />
+    <MESSAGE value="refactor: ajustes nos tratamentos de excecoes" />
+    <MESSAGE value="refactor: ajustes na resposta de login para retornar id" />
+    <MESSAGE value="feat: ajustes para aparecer o swagger e documentação da api" />
+    <MESSAGE value="refactor: ajustes na segurança para permitir acesso ao swagger" />
+    <MESSAGE value="refactor: ajustes para permitir acesso ao swagger" />
+    <MESSAGE value="refactor: ajustes no swagger" />
+    <MESSAGE value="refactor: ajustes no cors para permitir uso do swagger" />
+    <MESSAGE value="refactor: ajustes" />
+    <MESSAGE value="refactor: ajustes no cors" />
+    <MESSAGE value="refactor: ajustes na autorização" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: ajustes na autorização" />
+  </component>
+</project>
