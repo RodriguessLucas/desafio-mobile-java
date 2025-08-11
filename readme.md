@@ -119,15 +119,18 @@ Todos com senha **123456**:
 ### Ambiente Local  
 
 **Frontend:**
+  Para ter o frontend rodando localmente, baixe os arquivos da branche develop/mobileApp e use o npm para instalar as depedencias
 ```bash
 npx start
 a  # para abrir no emulador Android
 
 OBS: Ou escanear o QR Code pelo app do Expo no celular (rede local).
+
 ```
 
 **Backend:**  
 [Swagger Local](http://localhost:8080/swagger-ui/index.html)  
+  Para ter o backend rodando localmente, baixa os arquivos da branche deploy/backend, e utilizer o Docker para rodar e o PgAdmin
 
 ---
 
