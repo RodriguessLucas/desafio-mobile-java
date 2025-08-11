@@ -9,10 +9,11 @@ const API_URL = `${API_BASE_URL}/api`;
 interface DadosAutenticacao {
     estadoAut: {
         token: string | null;
-        autenticado: boolean | null
+        autenticado: boolean | null;
         usuario: { login: string } | null;
         nome: string | null;
         papel: 'DIRETOR' | 'PROFESSOR' | 'ALUNO' | 'ADMIN' | null;
+        id: string | null;
     };
     login: (login: string, senha: string) => Promise<void>;
     logout: () => void;
@@ -27,6 +28,7 @@ export function ProverAutenticacao({ children }: { children: React.ReactNode }) 
         usuario: null,
         nome: null,
         papel: null,
+        id: null, 
     });
     const router = useRouter();
 
@@ -43,13 +45,14 @@ export function ProverAutenticacao({ children }: { children: React.ReactNode }) 
                 usuario: response.data.user,
                 nome: response.data.name,
                 papel: response.data.user.role,
+                id: response.data.user.id, 
             });
             } catch (e) {
                 await logout();
             }
         } 
         else {
-            setEstadoAut({ token: null, autenticado: false, usuario: null,nome: null, papel: null });
+            setEstadoAut({ token: null, autenticado: false, usuario: null,nome: null, papel: null, id:null });
         }
         };
         loadToken();
@@ -59,14 +62,15 @@ export function ProverAutenticacao({ children }: { children: React.ReactNode }) 
         try {
             const response = await axios.post(`${API_URL}/auth/login`, { login, senha });
             
-            const { token, papel, emailDoUsuario, nome } = response.data;
+            const { token, papel, email, nome, id } = response.data;
 
             setEstadoAut({
                 token: token,
                 autenticado: true,
-                usuario: { login: emailDoUsuario },
+                usuario: { login: email },
                 nome: nome,
                 papel: papel,
+                id: id 
             });
 
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -81,8 +85,8 @@ export function ProverAutenticacao({ children }: { children: React.ReactNode }) 
     const logout = async () => {
         await SecureStore.deleteItemAsync('authToken');
         delete axios.defaults.headers.common['Authorization'];
-        setEstadoAut({ token: null, autenticado: false, usuario: null, nome: null, papel: null });
-        router.replace('../app/autenticacao/login');
+        setEstadoAut({ token: null, autenticado: false, usuario: null, nome: null, papel: null , id: null});
+        router.replace('/autenticacao/login'); 
     };
 
     return (
