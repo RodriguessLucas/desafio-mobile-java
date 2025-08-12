@@ -12,7 +12,7 @@ O desafio busca avaliar:
 
 > **Diferencial:** Implementar backend real com **Java + Spring Boot** (opcionalmente pode ser fake).  
 
-**Período:** 04/08 a 18/08/2025.
+**Período:** 28/07 a 11/08/2025.
 
 ---
 
