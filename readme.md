@@ -68,19 +68,24 @@ O desafio busca avaliar:
 ## 🖼 Prints e Diagramas
 
 ### 📌 Diagrama do Banco de Dados
-![Diagrama Banco de Dados](assets/diagrama-banco.png)
+![Diagrama Banco de Dados](/midia/image.png)
+<br>
+<br>
 
 ### 📱 Telas do Aplicativo
 
 **Tela de Login**
 ![Tela Login](/midia/login.jpeg)
-
+<br>
+<br>
 **Dashboard Aluno**
 ![Dashboard Aluno](/midia/dashboardAluno.jpeg)
-
+<br>
+<br>
 **Dashboard Professor**
 ![Dashboard Professor](/midia/dashboardProfessor.jpeg)
-
+<br>
+<br>
 **Dashboard Diretor**
 ![Dashboard Diretor](/midia/dashboardDiretor.jpeg)
 
